@@ -3,7 +3,7 @@ import pandas as pd
 
 def plot_loss(file_path, column_name):
     txt = open(file_path, 'r').readlines()
-    loss = np.array([row.split() for row in lst[23:]])
+    loss = np.array([row.split() for row in txt[23:]])
     df = pd.DataFrame(loss)
     df.columns = ['epoch', 
                   'RMSEpa_Etrain_pu', 
