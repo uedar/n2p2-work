@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-def plot_loss(file_path, column_name):
+def plot_loss(file_path, column_name, write_csv=True):
     txt = open(file_path, 'r').readlines()
     loss = np.array([row.split() for row in txt[23:]])
     df = pd.DataFrame(loss)
@@ -27,5 +27,7 @@ def plot_loss(file_path, column_name):
             df[col] = df[col].astype(float)
 
     df.plot('epoch', column_name, marker='o')
+    if write_csv:
+        df.to_csv('learning_curve.csv',index=False)
 
 plot_loss('./learning-curve.out','RMSEpa_Etrain_pu')
