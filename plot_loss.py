@@ -1,25 +1,14 @@
 import numpy as np
 import pandas as pd
+import re
 
-def plot_loss(file_path, column_name, write_csv=True):
+def plot_loss(file_path, column_name, write_csv=False):
     txt = open(file_path, 'r').readlines()
-    loss = np.array([row.split() for row in txt[23:]])
+    columns = [s for s in txt if re.match('#\s*epoch.*', s)][0].split()[1:]
+    extract_loss = [s for s in txt if re.match('\s*\d\s*.*', s)]
+    loss = [s.split() for s in extract_loss]
     df = pd.DataFrame(loss)
-    df.columns = ['epoch', 
-                  'RMSEpa_Etrain_pu', 
-                  'RMSEpa_Etest_pu', 
-                  'RMSE_Etrain_pu', 
-                  'RMSE_Etest_pu', 
-                  'MAEpa_Etrain_pu', 
-                  'MAEpa_Etest_pu',
-                  'MAE_Etrain_pu',
-                  'MAE_Etest_pu',
-                  'RMSE_Ftrain_pu',
-                  'RMSE_Ftest_pu',
-                  'RMSE_Ftest_pu',
-                  'MAE_Ftest_pu'
-                 ]
-
+    df.columns = columns
     for col in df.columns:
         if col == 'epoch':
             df[col] = df[col].astype(int)
@@ -29,5 +18,4 @@ def plot_loss(file_path, column_name, write_csv=True):
     df.plot('epoch', column_name, marker='o')
     if write_csv:
         df.to_csv('learning_curve.csv',index=False)
-
-plot_loss('./learning-curve.out','RMSEpa_Etrain_pu')
+plot_loss('./learing_curve2.out','RMSEpa_Etrain_pu', write_csv=True)
