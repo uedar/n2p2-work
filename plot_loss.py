@@ -18,4 +18,4 @@ def plot_loss(file_path, column_name, write_csv=False):
     df.plot('epoch', column_name, marker='o')
     if write_csv:
         df.to_csv('learning_curve.csv',index=False)
-plot_loss('./learing_curve2.out','RMSEpa_Etrain_pu', write_csv=True)
+plot_loss('./learning-curve.out','RMSEpa_Etrain_pu', write_csv=True)
