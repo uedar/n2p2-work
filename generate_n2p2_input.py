@@ -8,7 +8,7 @@ force_unit = Hartree/Bohr
 def read_state_output(output_file):  
     data = []
     extract = False
-    txt = open('Cu.out', 'r').read()
+    txt = open(output_file, 'r').read()
     r = re.findall(r'^.*CONV.*(\d+\.\d+)\s+(\d+\.\d+)\s+(\d+\.\d+)', txt, flags=re.MULTILINE)
     cell = Bohr*np.array(r, dtype=float)
     with open (output_file) as fd:
@@ -38,14 +38,9 @@ def read_state_output(output_file):
     forces = force_unit*np.array(force_data, dtype=float)
     return structure, energy, forces
 
-file_paths = [
-    'Cu.out',
-    'Cu.out',
-    'Cu.out'
-]
-with open('input.data', 'w') as f:
-    for input_path in file_paths:
-        structure, energy, forces = read_state_output(input_path) 
+def write_n2p2_input(state_output_path):
+    with open('input.data', 'w') as f:
+        structure, energy, forces = read_state_output(state_output_path) 
         print('begin', file=f)
         for cell in structure.cell:
             print('lattice', *cell, file=f)
