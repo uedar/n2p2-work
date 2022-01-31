@@ -3,8 +3,12 @@ import warnings
 from ase.units import Hartree, Bohr
 import numpy as np
 from ase import Atoms
+import os
+import sys
 
 force_unit = Hartree/Bohr
+directory = sys.argv[1]
+
 def read_state_output(output_file):  
     data = []
     extract = False
@@ -38,13 +42,18 @@ def read_state_output(output_file):
     forces = force_unit*np.array(force_data, dtype=float)
     return structure, energy, forces
 
-def write_n2p2_input(state_output_path):
+def n2p2_input_from_state_output(directory):
+    paths = [os.path.join(root,file) for root, dirs, files in os.walk(directory) for file in files]
+
     with open('input.data', 'w') as f:
-        structure, energy, forces = read_state_output(state_output_path) 
-        print('begin', file=f)
-        for cell in structure.cell:
-            print('lattice', *cell, file=f)
-        for i, j in enumerate(structure):
-            print('atom', *j.position, j.symbol,'0.0','0.0',*forces[i], file=f)
-        print('energy', energy, file=f)
-        print('end', file=f)
+        for path in paths:
+            structure, energy, forces = read_state_output(path)
+            print('begin', file=f)
+            for cell in structure.cell:
+                print('lattice', *cell, file=f)
+            for i, j in enumerate(structure):
+                print('atom', *j.position, j.symbol,'0.0','0.0',*forces[i], file=f)
+            print('energy', energy, file=f)
+            print('end', file=f)
+
+n2p2_input_from_state_output(directory)
