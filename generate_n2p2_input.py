@@ -13,7 +13,7 @@ def read_state_output(output_file):
     data = []
     extract = False
     txt = open(output_file, 'r').read()
-    r = re.findall(r'^.*CONV.*(\d+\.\d+)\s+(\d+\.\d+)\s+(\d+\.\d+)', txt, flags=re.MULTILINE)
+    r = re.findall(r'^.*CONV.*\s([-|\d]+\.\d+)\s+([-|\d]+\.\d+)\s+([-|\d]+\.\d+)', txt, flags=re.MULTILINE)
     cell = Bohr*np.array(r, dtype=float)
     with open (output_file) as fd:
         lines = fd.readlines()

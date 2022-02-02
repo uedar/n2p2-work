@@ -12,7 +12,7 @@ def get_dft_force(output_file):
     all_data = []
     extract = False
     txt = open(output_file, 'r').read()
-    r = re.findall(r'^.*CONV.*(\d+\.\d+)\s+(\d+\.\d+)\s+(\d+\.\d+)', txt, flags=re.MULTILINE)
+    r = re.findall(r'^.*CONV.*\s([-|\d]+\.\d+)\s+([-|\d]+\.\d+)\s+([-|\d]+\.\d+)', txt, flags=re.MULTILINE)
     cell = Bohr*np.array(r, dtype=float)
     with open (output_file, 'r') as f:
         for line1 in f:
