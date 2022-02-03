@@ -62,6 +62,3 @@ def n2p2_input_from_state_output(directory):
                 print('atom', *j.position, j.symbol,'0.0','0.0',*forces[i], file=f)
             print('energy', energy, file=f)
             print('end', file=f)
-
-# structure, energy, forces = get_dft_force('./nfout_1_1.5')
-n2p2_input_from_state_output('/home/yyamada/database/data')

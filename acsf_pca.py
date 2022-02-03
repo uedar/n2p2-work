@@ -1,3 +1,5 @@
+import sys
+sys.path.append(["/home/ueda/n2p2-work", "/home/ueda/n2p2/src/pynnp"])
 import numpy as np
 import pynnp
 
