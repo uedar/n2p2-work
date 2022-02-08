@@ -1,5 +1,4 @@
 import re
-import warnings
 from ase.units import Hartree, Bohr
 import numpy as np
 from ase import Atoms
@@ -8,7 +7,7 @@ def read_state_trajectory(output_file):
     force_unit = Hartree/Bohr
     full_text = open(output_file, 'r').read()
     cell = Bohr*np.array(re.findall(r'^.*CONV.*\s([-|\d]+\.\d+)\s+([-|\d]+\.\d+)\s+([-|\d]+\.\d+)', full_text, flags=re.MULTILINE), dtype=float)
-    enegry = Hartree*np.array([p.split()[1] for p in re.findall(r'CONVERGED ENERGY AND FORCES(.*\n){3}', full_text)], dtype=float)
+    energy = Hartree*np.array([p.split()[1] for p in re.findall(r'CONVERGED ENERGY AND FORCES(.*\n){3}', full_text)], dtype=float)
     trajectory = [f[0] for f in re.findall(r'ATOM\s*COORDINATES\s*FORCES\nMD.*\n((MD.*\n)*)',full_text)]
     ase_traj = []
     forces = []
