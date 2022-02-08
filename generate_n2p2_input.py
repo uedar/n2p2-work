@@ -7,7 +7,7 @@ import os
 import sys
 
 force_unit = Hartree/Bohr
-directory = sys.argv[1]
+# directory = sys.argv[1]
 
 def read_state_output(output_file):  
     data = []
@@ -56,4 +56,4 @@ def n2p2_input_from_state_output(directory):
             print('energy', energy, file=f)
             print('end', file=f)
 
-n2p2_input_from_state_output(directory)
+# n2p2_input_from_state_output(directory)
