@@ -13,7 +13,7 @@ def read_state_trajectory(output_file):
     forces = []
     for atoms in trajectory:
         atoms_array = atoms.strip().split('\n')
-        species = np.array([atom_str.split()[2] for atom_str in d1])
+        species = np.array([atom_str.split()[2] for atom_str in atoms_array])
         positions = Bohr*np.array([atom_str.split()[3:6] for atom_str in atoms_array], dtype=float)
         structure = Atoms(symbols=species, positions = positions, cell=cell)
         ase_traj.append(structure)
@@ -26,7 +26,7 @@ with open('input.data', 'w') as f:
         for i, atoms in enumerate(traj):
             for cell in atoms.cell:
                 print('lattice', *cell, file=f)
-            for j, k in enumerate(atoms):
-                print('atom', *k.position, k.symbol,'0.0','0.0',*forces[i][j], file=f)
+            for j, atom in enumerate(atoms):
+                print('atom', *atom.position, atom.symbol,'0.0','0.0',*forces[i][j], file=f)
             print('energy', energy, file=f)
             print('end', file=f)
