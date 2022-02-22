@@ -13,7 +13,16 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.7"
-      - name: flake8 Lint
+      - name: flake8
         uses: reviewdog/action-flake8@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: pylint
+        uses: dciborow/action-pylint@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          # Change reviewdog reporter if you need [github-pr-check,github-check,github-pr-review].
+          reporter: github-pr-review
+          # Change reporter level if you need.
+          # GitHub Status Check won't become failure with warning.
+          level: warning
