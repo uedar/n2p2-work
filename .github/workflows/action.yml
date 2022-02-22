@@ -29,7 +29,7 @@ jobs:
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pylint --rcfile=~/.pylintrc functions/*.py | reviewdog -efm="%f:%l:%c: %m" -reporter=github-pr-review -fail-on-error=true
+          pylint --rcfile=~/.pylintrc $(git ls-files '*.py') | reviewdog -efm="%f:%l:%c: %m" -reporter=github-pr-review -fail-on-error=true -diff="git diff FETCH_HEAD"
 
   flake8-lint:
     runs-on: ubuntu-latest
@@ -46,4 +46,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
-          fail-on-error: true
+          fail_on_error: true
