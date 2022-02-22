@@ -1,12 +1,10 @@
-from numpy import *
+from pandas import *
     
-errorerror
+errorerrorerror
 
-dd
-failonerro
-maximumlinelengthmaximumlinelaaaengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelength = ''
+mmaximumlinelengthmaximumlinelaaaengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelengthmaximumlinelength = ''
     
-    
+def errorfunc():   
     
     
     
