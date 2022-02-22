@@ -1,6 +1,6 @@
 name: reviewdog
 
-on: [push]
+on: [pull_request]
 
 jobs:
   pylint:
@@ -45,3 +45,4 @@ jobs:
         uses: reviewdog/action-flake8@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
