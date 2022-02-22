@@ -12,25 +12,22 @@ jobs:
       - name: Set up Python environment
         uses: actions/setup-python@v2
         with:
-          python-version: "3.7"
-      - name: flake8
-        uses: reviewdog/action-flake8@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          python-version: "3.7"      
       - name: Setup pylint
-          run: |
-            python -m pip install --upgrade pip
-            pip install pylint
-            pylint --generate-rcfile > ~/.pylintrc
-
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+          pylint --generate-rcfile > ~/.pylintrc
       - name: Setup reviewdog
         run: |
           mkdir -p $HOME/bin && curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh -s -- -b $HOME/bin
           echo ::add-path::$HOME/bin
-
       - name: pylint
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pylint --rcfile=~/.pylintrc functions/*.py | reviewdog -efm="%f:%l:%c: %m" -reporter=github-pr-review
-
+      - name: flake8
+        uses: reviewdog/action-flake8@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
