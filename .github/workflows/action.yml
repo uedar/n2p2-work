@@ -1,6 +1,6 @@
 name: reviewdog
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   pylint:
@@ -33,7 +33,7 @@ jobs:
 
   flake8-lint:
     runs-on: ubuntu-latest
-    name: Lint
+    name: flake8
     steps:
       - name: Check out source repository
         uses: actions/checkout@v2
