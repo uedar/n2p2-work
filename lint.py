@@ -1,7 +1,7 @@
 
 
 
-  
+a = 'a'
   
 def errorfunc():   
     
